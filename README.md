@@ -30,9 +30,11 @@ All variables are quantitative (integer or numeric) except for PLAYER, TEAM, Con
 ### i) Plots of Variables:
 To start off our analysis, we decided to plot the major components of the box score (Points Per Game, Rebounds, Assists) as well as Wins. The primary stats within the box score typically constitute the “eye test” for a player’s skill level, while wins serve to differentiate “skilled” players from “valuable” players. We hypothesize that these variables will be important and influential for the model and as such we want to look at their distribution. 
 
+!["ppg"](images/ppg.png)
+!["ppg"](images/reb.png)
+!["ppg"](images/ast.png)
+!["ppg"](images/w.png)
 
-
-​​
 From the above plots, we can see that there is a strong negative correlation between the various stats and All-Star Rank.
 
 ### ii) Correlation:
