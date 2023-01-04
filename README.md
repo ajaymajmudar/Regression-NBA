@@ -125,6 +125,7 @@ Considering the reasonability of our model, we recommend that players aspiring t
 ## References:
 
 2021 NBA All-Star Game Voting Scores. Basketball. (n.d.). Retrieved November 20, 2021, from https://www.basketball-reference.com/allstar/NBA_2021_voting.html
+
 Players advanced. NBA Stats. (n.d.). Retrieved November 20, 2021, from https://www.nba.com/stats/players/advanced/?sort=GP&dir=-1. 
 
 
