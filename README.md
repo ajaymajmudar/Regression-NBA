@@ -40,60 +40,68 @@ From the above plots, we can see that there is a strong negative correlation bet
 ### ii) Correlation:
 We then plotted the correlation between the variables used in the model to check for multicollinearity. 
 
-
+!["ppg"](images/corr.png)
 
 As you can see from the above figure, there is a high degree of positive correlation between some of the variables such as field goals made and field goals attempted. This makes sense as many of these variables have an inherently causational relationship. For example, more field goals attempted should lead to more field goals made. Because of this, we will likely not need two such variables which tell us similar information for the final model.
 
 ## Model Selection Process:
 
+!["ppg"](images/modelselec.png)
 
 We choose model 8(1). This has the highest adjusted R2 value and lowest  Cp. The 8 variables are Age, Games Played, Wins, Points per Game, Field Goals Attempted, Field Goal Percentage, Rebounds, Assists. 
 
 ## Multicollinearity:
 After selecting these variables, we wanted to check multicollinearity as not to have multiple variables giving us the same information.
 
-
+!["ppg"](images/multi.png)
 
 As is shown by the VIF scores above, PPG and FGA both have a high degree of multicollinearity (VIF>10). Keeping this in mind, we run backward stepwise variable selection using AIC as the metric. The final step of this process is shown below:
 
+!["ppg"](images/selection.png)
 
 Given that PPG was in this list of variables and FGA was not, we decided to remove FGA to try to alleviate the issue of multicollinearity. We also added DD2(double-doubles) and Plus.Minus(Plus-Minus) as the backward stepwise regression showed these variables could be important. After this change in variables, we again run the VIF scores.
+
+!["ppg"](images/vif.png)
 
 There is no apparent multicollinearity within this new model as all of the VIF scores are less than the threshold of 10. This new model (model8var2) also retains a high adjusted R2value of 0.7335. 
 
 ### iii)Residual Analysis:
 One of the assumptions in the use of a linear model is that the residuals show constant variance and do not grow or decrease in a noticeable pattern. We plot the residuals below measured against the player index(which is sorted by PPG). 
 
+!["ppg"](images/residual.png)
+
 We can see that the constant variance assumption is violated as there is a growth in the spread of the residuals as the index increases.
 
 Another assumption that we make in using the linear model is that the residuals are normally distributed. We also graph the normal probability plot which in theory can tell us if there are places in the data in which the residuals significantly veer off of the Normal Distribution. The variable y represents AllStar Rank.
 
+!["ppg"](images/normal.png)
+
 As can be seen from the above plot, the residuals have a significant difference from that of the normal distribution along with both extremes. 
 	To fix these issues, we perform several transformations on the AllStar Rank. These transformations are square root, quartic root, and natural log. We show the residual plots under the transformations below.
 
-
-
-
-
-
-
+!["ppg"](images/transform.png)
 
 While the natural log and quartic root transformation seem to make the problem of differing variance worse, the square root transformation leads to a higher degree of constant variance. We then plot the normal probability plots under the transformations and show those results below.
+
+!["ppg"](images/normal-transform.png)
 
 Again, the quartic root and natural log transformation seem to maintain or exaggerate the problem of non-normally distributed residuals. The square root transformation however seems to generally alleviate the issue.
 
 ## V) Analysis of Outliers:
 Using the leverage values and their respective cutoff, we find the below players to be outliers with respect to the independent variables.
 
+!["ppg"](images/outlier.png)
+
 Utilizing studentized residuals and their respective cutoff, we can see the below players are outliers with respect to the square root of the AllStarRank.
 
-
+!["ppg"](images/outlier2.png)
 
 ## VI) Influential Points:
 We computed the quantile over the F-distribution to determine the possible influential points based on the Cook’s Distance. Our results found no influential points (Cooks D>F0.5) or points with the potential to be influenced (CooksD<F0.5 and CooksD>F0.8)
 
 ## VII) Performance Measures:
 Our model had an MSE (Mean Squared Error) of 1.276448, MAPE (Mean Absolute Percentage Error) of 16.03014, and a MAD(Mean Absolute Deviation) of 0.8710102. Given the high degree of volatility in predicting all-stars, we believe that these metrics show that our model is fairly robust and has utility. 
+
 
 ## Conclusion/Summary/Recommendations:
 After passing in the second half of the 2020-2021 season's player data to the optimized regression model, we observed the new AllStarRank for each player. Using the second half of the season as a proxy to determine All-Star selections for the 2021-2022 season, we identified the five starters on each team. We sorted the new AllStarRank in ascending order, accounting for position and conference to capture the following 15 highest ranked players (shown in appendix).
@@ -109,281 +117,9 @@ We also elected not to predict reserves because of the wider variability in thei
 Considering the reasonability of our model, we recommend that players aspiring to receive All-Star recognition consider the variables we highlighted in order to cement their status as legends and maximize earnings potential. 
 
 
-
-
-
-
 ## Appendix:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Optimal Linear Regression Model & ANOVA Table 
-
-
-
-ID
-AllStarRank
-Name
-Conference
-Position
-All-Star Starter?
-2
-1.180892
-Donovan Mitchell
-West
-Backcourt
-Yes
-10
-1.41396
-Shai Gilgeous-Alexander
-West
-Backcourt
-Yes
-16
-1.530637
-Nikola Jokic
-West
-Frontcourt
-Yes
-5
-1.60616
-De'Aaron Fox
-West
-Backcourt
-No
-14
-1.916234
-Joel Embiid
-East
-Frontcourt
-Yes
-3
-2.262009
-Bradley Beal
-East
-Backcourt
-Yes
-8
-2.271601
-Giannis Antetokounmpo
-East
-Frontcourt
-Yes
-4
-2.621146
-Zion Williamson
-West
-Frontcourt
-Yes
-6
-2.862073
-Jayson Tatum
-East
-Frontcourt
-Yes
-1
-3.046502
-Stephen Curry
-West
-Backcourt
-No
-26
-3.223893
-James Harden
-East
-Backcourt
-Yes
-12
-3.439643
-Devin Booker
-West
-Backcourt
-No
-13
-3.44279
-Karl-Anthony Towns
-West
-Frontcourt
-Yes
-9
-3.502565
-Luka Doncic
-West
-Backcourt
-No
-21
-3.510287
-Trae Young
-East
-Backcourt
-No
-
-Predicted All-Stars
-
-
-
-
-
-
-
-
-
-
-
-
-
-Name
-ID
-PLAYER
-TEAM
-AGE
-GP
-W
-Description
-Player ID ordered by PPG
-Player name
-Player team
-Player age
-Games played
-Wins
-Type
-Integer
-Character
-Character
-Integer
-Integer
-Integer
-
-
-Name
-L
-MIN
-PPG
-FGM
-FGA
-FG%
-Description
-Losses
-Minutes per game
-Points per game
-Field goals made
-Field goals attempted
-Field goal percentage
-Type
-Integer
-Numeric
-Numeric
-Numeric
-Numeric
-Numeric
-
-
-Name
-3PM
-3PA
-3P%
-FTM
-FTA
-FT%
-Description
-Three pointers made
-Three pointers attempted
-Three point percentage
-Free throws made
-Free throws attempted
-Free throw percentage
-Type
-Numeric
-Numeric
-Numeric
-Numeric
-Numeric
-Numeric
-
-
-Name
-OREB
-DREB
-REB
-AST
-TOV
-STL
-Description
-Offensive rebounds
-Defensive rebounds
-Rebounds
-Assists
-Turnovers
-Steals
-Type
-Numeric
-Numeric
-Numeric
-Numeric
-Numeric
-Numeric
-
-
-Name
-BLK
-PF
-FP
-DD2
-TD3
-
-
-Description
-Blocks
-Personal fouls
-Fantasy points
-Double doubles
-Triple doubles
-
-
-Type
-Numeric
-Numeric
-Numeric
-Integer
-Integer
-
-
-
-
-Name
-AllStarRank
-AllStar
-Conference
-Position
-Plus/Minus
-Description
-Weighted average All Star Ranking
-All-star selection (binary)
-Player conference
-Player position
-Box plus/minus (point differential when player in on court)
-Type
-Numeric
-Integer
-Character
-Character
-Numeric
-
-Variable descriptions
-
+!["ppg"](images/all-star-table.png)
 
 
 ## References:
